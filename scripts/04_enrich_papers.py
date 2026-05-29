@@ -41,6 +41,7 @@ def main() -> None:
             if pid:
                 id_set.add(pid)
 
+    # 查漏补缺
     if (out_dir / "collected_edges.csv").exists():
         edges = pd.read_csv(out_dir / "collected_edges.csv")
         for col in ["source_paper_id", "target_paper_id", "anchor_paper_id", "neighbor_paper_id"]:

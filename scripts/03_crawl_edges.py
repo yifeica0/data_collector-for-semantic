@@ -8,6 +8,7 @@ from typing import Any
 
 import pandas as pd
 from tqdm import tqdm
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -53,6 +54,7 @@ def _crawl_one_endpoint(
             "limit": page_limit,
             "publicationDateOrYear": publication_date_or_year,
         }
+        time.sleep(3.0)
         data = client.get(f"/paper/{anchor_id}/{endpoint}", params=params)
         if not isinstance(data, dict) or data.get("error"):
             break

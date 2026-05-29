@@ -38,15 +38,19 @@ def main() -> None:
     if pool.empty:
         pool = papers.copy()
 
-    n = int(acfg.get("n_anchors", 200))
-    high_n = int(n * float(acfg.get("high_citation_fraction", 0.4)))
-    recent_n = int(n * float(acfg.get("recent_fraction", 0.3)))
-    random_n = n - high_n - recent_n
+    
     selected_ids: list[str] = []
 
     if bool(acfg.get("include_seed_papers", True)) and (out_dir / "seed_papers.csv").exists():
         seed_df = pd.read_csv(out_dir / "seed_papers.csv")
         selected_ids.extend([pid for pid in seed_df.get("paperId", []) if isinstance(pid, str) and pid])
+    
+    n = int(acfg.get("n_anchors", 200))
+    # Calculate quotas after seeds so total selected_ids stays at n.
+    remaining_quota = max(0, n - len(selected_ids))
+    high_n = int(remaining_quota * float(acfg.get("high_citation_fraction", 0.4)))
+    recent_n = int(remaining_quota * float(acfg.get("recent_fraction", 0.3)))
+    random_n = remaining_quota - high_n - recent_n
 
     high = pool[~pool["paperId"].isin(selected_ids)].sort_values("citationCount", ascending=False).head(high_n)
     selected_ids.extend(high["paperId"].tolist())
@@ -62,14 +66,22 @@ def main() -> None:
         random_df = remaining.sample(n=min(random_n, len(remaining)), random_state=int(acfg.get("random_seed", 172)) + 1)
         selected_ids.extend(random_df["paperId"].tolist())
 
-    # Fill up if seed papers created duplicates or pools were small.
+    # Fill up if duplicates or small pools reduced the count.
     selected_ids = list(dict.fromkeys(selected_ids))
     if len(selected_ids) < n:
         extra = pool[~pool["paperId"].isin(selected_ids)].head(n - len(selected_ids))["paperId"].tolist()
         selected_ids.extend(extra)
 
-    anchors = papers[papers["paperId"].isin(selected_ids[:n])].copy()
-    anchors["anchor_rank"] = anchors["paperId"].map({pid: i for i, pid in enumerate(selected_ids[:n])})
+    # Drop IDs absent from bulk (e.g. seed papers not collected), then fill again.
+    paper_ids_set = set(papers["paperId"])
+    valid_ids = [pid for pid in selected_ids if pid in paper_ids_set]
+    if len(valid_ids) < n:
+        extra = pool[~pool["paperId"].isin(valid_ids)].head(n - len(valid_ids))["paperId"].tolist()
+        valid_ids.extend(extra)
+    final_ids = valid_ids[:n]
+
+    anchors = papers[papers["paperId"].isin(final_ids)].copy()
+    anchors["anchor_rank"] = anchors["paperId"].map({pid: i for i, pid in enumerate(final_ids)})
     anchors = anchors.sort_values("anchor_rank")
     keep_cols = [c for c in ["anchor_rank", "paperId", "title", "year", "citationCount", "referenceCount", "venue", "abstract"] if c in anchors.columns]
     anchors[keep_cols].to_csv(out_dir / "anchor_papers.csv", index=False)

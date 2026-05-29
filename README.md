@@ -21,7 +21,7 @@ The scripts use these Semantic Scholar Graph API endpoints:
 ## Setup
 
 ```bash
-cd data_collector
+cd data_collector-for-semantic
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

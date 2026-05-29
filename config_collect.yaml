@@ -40,9 +40,9 @@ anchors:
   high_citation_fraction: 0.40
   recent_fraction: 0.30
   random_fraction: 0.30
-  recent_year_threshold: 2021
+  recent_year_threshold: 2023
   random_seed: 172
-  include_seed_papers: true
+  include_seed_papers: false
 
 edges:
   # For final run, use 500 or 1000. Smaller numbers make quick testing easier.
