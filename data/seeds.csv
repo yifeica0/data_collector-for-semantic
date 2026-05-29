@@ -1,0 +1,11 @@
+seed_id,title,topic
+1,Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift,machine learning
+2,ImageNet Classification with Deep Convolutional Neural Networks ,deep learning
+3,Deep Contextualized Word Representations,natural language processing
+4,Deep Residual Learning for Image Recognition,computer vision
+5,Attention Is All You Need,large language models
+6,In Search of an Understandable Consensus Algorithm,distributed systems
+7,SoK: Prudent Evaluation Practices for Fuzzing,cybersecurity
+8,QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs,software engineering
+9,Congestion avoidance and control,computer networks
+10,Self-adjusting binary search trees,algorithms data structures

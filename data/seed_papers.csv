@@ -1,0 +1,11 @@
+seed_id,input_title,topic,paperId,matched_title,matchScore,year,citationCount
+1,Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift,machine learning,995c5f5e62614fcb4d2796ad2faab969da51713e,Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift,309.1007,2015,46778
+2,ImageNet Classification with Deep Convolutional Neural Networks,deep learning,abd1c342495432171beb7ca8fd9551ef13cbd0ff,ImageNet classification with deep convolutional neural networks,166.59422,2012,129165
+3,Deep Contextualized Word Representations,natural language processing,3febb2bed8865945e7fddc99efd791887bb7e14f,Deep Contextualized Word Representations,143.4242,2018,12164
+4,Deep Residual Learning for Image Recognition,computer vision,2c03df8b48bf3fa39054345bafabfeff15bfd11d,Deep Residual Learning for Image Recognition,150.40501,2015,229150
+5,Attention Is All You Need,large language models,204e3073870fae3d05bcbc2f6a8e263d9b72e776,Attention is All you Need,131.86722,2017,178235
+6,In Search of an Understandable Consensus Algorithm,distributed systems,9979809e4106b29d920094be265b33524cde8a40,In Search of an Understandable Consensus Algorithm,160.2268,2014,2732
+7,SoK: Prudent Evaluation Practices for Fuzzing,cybersecurity,08a8008de7d6de4213835b5f7f64832073d7fb09,SoK: Prudent Evaluation Practices for Fuzzing,204.76398,2024,72
+8,QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs,software engineering,75d28729e96691eb85ae2b34e791473a24062ce5,QuickCheck: a lightweight tool for random testing of Haskell programs,257.67462,2000,1321
+9,Congestion avoidance and control,computer networks,4c7db20078a55d7b86f9da246524306383a39ed8,Congestion avoidance and control,102.623436,1988,4590
+10,Self-adjusting binary search trees,algorithms data structures,bb3c073053d93d6abfef9a9c76ec2c5d7f09c313,Self-adjusting binary search trees,172.36627,1985,1446
